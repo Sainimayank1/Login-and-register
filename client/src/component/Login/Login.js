@@ -19,7 +19,6 @@ function Login() {
 
   return (
     <div className='login'>
-    {console.log(user)}
       <form className='Form Main'>
       <h1>Login</h1>
         <input type="email" name='email' value={user.email} placeholder="Enter your mail" autoComplete='off' onChange={handlechange}></input>
