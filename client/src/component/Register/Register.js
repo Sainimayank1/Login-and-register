@@ -2,8 +2,10 @@ import React from 'react'
 import './style.css'
 import { useState } from 'react'
 import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 function Register() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -26,7 +28,7 @@ function Register() {
       if (password === repassword) {
 
         axios.post("http://localhost:5000/register", user)
-        .then(()=>{console.log("Submited");})
+        .then(()=>{navigate('/')})
         .catch((err)=>{console.log(err)})
       }
       else {
@@ -49,7 +51,7 @@ function Register() {
         <input type="password" name="repassword" value={user.repassword} placeholder="Re-enter Password" autoComplete='off' onChange={handlechange}></input>
         <div className='button' onClick={handleRegister}>Register</div>
         <div>OR</div>
-        <div className='button'>Login</div>
+        <div className='button' onClick={()=>{navigate("/")}}>Login</div>
       </form>
     </div>
   )

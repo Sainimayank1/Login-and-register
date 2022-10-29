@@ -8,6 +8,8 @@ app.use(express.json())
 app.use(express.urlencoded());
 app.use(cors())
 
+const port  = 5000 || process.env.PORT;
+
 const userSchema = mongoose.Schema({
     name: String,
     email: String,
@@ -24,19 +26,39 @@ mongoose.connect(process.env.LINK)
         console.log(error);
     });
 
-app.get("/login", (req, res) => {
-    console.log("login")
-})
-
 app.get("/", (req, res) => {
     res.send("Home")
 })
 
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        User.findOne({ email: email }, (err, user) => {
+            if (user) {
+                if (password === user.password) {
+                    res.status(200).send({ message: "Login succesfull", user })
+                }
+                else {
+                    res.send({ message: "Invaild Detail" })
+                }
+            }
+            else {
+                res.send({ message: "User don't registered" })
+            }
+        })
+
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+
 app.post("/register", (req, res) => {
     const { name, email, password } = req.body;
-    User.findOne({email:email}, (err, find) => {
+    User.findOne({ email: email }, (err, find) => {
         if (find) {
-            res.send({message:"Already exist"})
+            res.send({ message: "Already exist" })
         }
         else {
             const user = new User({ name, email, password });
@@ -54,9 +76,9 @@ app.post("/register", (req, res) => {
 
 
 
-app.listen(5000 || process.PORT)
+app.listen(port)
 {
-    console.log("listen on port " + process.env.PORT);
+    console.log("listen on port " + port);
 }
 
 

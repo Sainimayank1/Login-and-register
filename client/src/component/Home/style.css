@@ -25,7 +25,7 @@
         box-shadow: 0 0 15px rgb(0, 0, 0);
 }
 
-button
+.button
 {
     background-color: rgb(9, 129, 227);
     outline: none;

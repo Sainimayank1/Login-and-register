@@ -1,11 +1,15 @@
 import React from 'react'
 import "./style.css"
-function Home() {
+import { useNavigate } from 'react-router'
+function Home({User , confirmUser}) {
+  const navigate = useNavigate();
+ 
+
   return (
     <div className='homepage'>
         <div className='Main'>
-            <h1>Homepage</h1>
-            <button>Logout</button>
+            <h1>Hello {User.name}</h1>
+            <div className='button' onClick={()=>{confirmUser({}); navigate("/");}}>Logout</div>
         </div>
     </div>
   )
