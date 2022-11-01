@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontent":"cd client && npm start",
+    "backend":"cd server && npm start",
+    "start": "concurrently \"npm run frontent\" \"npm run backend \""
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.5.0"
+  }
 }
